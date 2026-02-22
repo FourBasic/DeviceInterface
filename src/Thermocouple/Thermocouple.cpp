@@ -11,4 +11,5 @@ void Thermocouple::setup(uint8_t _type, uint8_t _decimal) {
 int Thermocouple::update(int _uVolt) {
     uVolt = _uVolt;
     tempC = uVolt * uv_per_10C[0];
+    return (int) tempC;
 }
