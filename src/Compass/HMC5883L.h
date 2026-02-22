@@ -1,5 +1,5 @@
-#ifndef COMPASS_H
-#define COMPASS_H
+#ifndef HMC5883L_H
+#define HMC5883L_H
 #include <Arduino.h>
 #include "HMC5883Llib.h"
 

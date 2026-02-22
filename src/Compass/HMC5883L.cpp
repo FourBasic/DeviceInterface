@@ -1,4 +1,4 @@
-#include "Compass.h"
+#include "HMC5883L.h"
 #include <Arduino.h>
 #include "HMC5883Llib.h"
 

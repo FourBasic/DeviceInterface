@@ -1,5 +1,5 @@
-#ifndef ULTRASONICRANGE_H
-#define ULTRASONICRANGE_H
+#ifndef HCSR04_H
+#define HCSR04_H
 #include <Arduino.h>
 
 class UltrasonicRange {

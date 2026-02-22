@@ -1,5 +1,5 @@
-#ifndef COLORSENSOR_H
-#define COLORSENSOR_H
+#ifndef TSC3200_H
+#define TSC3200_H
 #include <Arduino.h>
 #include "GeneralFunctions.h"
 
