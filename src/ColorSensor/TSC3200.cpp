@@ -1,4 +1,4 @@
-#include "ColorSensor.h"
+#include "TSC3200.h"
 #include <Arduino.h>
 #include "GeneralFunctions.h"
 

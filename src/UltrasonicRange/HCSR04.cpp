@@ -1,4 +1,4 @@
-#include "UltrasonicRange.h"
+#include "HCSR04.h"
 #include <Arduino.h>
 
 // Speed of Sound 340 m/s = 0.034 cm/us
