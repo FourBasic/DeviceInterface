@@ -20,6 +20,7 @@ int Thermocouple::update(int _uVolt) {
             break;
         }
     }
+
     if (element < 0 || element > 24) {
         tempC = 9999.9;
     } else {
@@ -36,5 +37,5 @@ int Thermocouple::update(int _uVolt) {
         }
     }
     
-    return (int) tempC * (1 + decimal);
+    return int(tempC * (1 + decimal));
 }
