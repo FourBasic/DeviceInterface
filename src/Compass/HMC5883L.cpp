@@ -1,6 +1,6 @@
 #include "HMC5883L.h"
 #include <Arduino.h>
-#include "HMC5883Llib.h"
+#include "lib/HMC5883Llib.h"
 
 Compass::Compass() { }
 

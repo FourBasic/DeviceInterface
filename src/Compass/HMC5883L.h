@@ -1,7 +1,7 @@
 #ifndef HMC5883L_H
 #define HMC5883L_H
 #include <Arduino.h>
-#include "HMC5883Llib.h"
+#include "lib/HMC5883Llib.h"
 
 class Compass {
   public:		
