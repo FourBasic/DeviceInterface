@@ -49,7 +49,9 @@ bool Thermocouple::checkLimits() {
         return false;
     } else if (faultCode == TC_FAULT_HIGH_LIMIT || faultCode == TC_FAULT_LOW_LIMIT) {
         faultCode = 0;
-    }    
+    } else { 
+        return true;
+    }  
 }
 
 int Thermocouple::getFaultCode() { 
