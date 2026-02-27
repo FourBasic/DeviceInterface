@@ -27,7 +27,7 @@ int Thermocouple::update(int _uVolt) {
         float m;
         switch (type) {
             case TC_TYPE_K:      
-                m = (10.0 + (element * 10.0)) / (uv_per_10C_K[element]);
+                m = (10.0 + (float(element) * 10.0)) / float(uv_per_10C_K[element]);
                 tempC = uVolt * m;
                 break;
 
@@ -37,10 +37,10 @@ int Thermocouple::update(int _uVolt) {
         }
     }
     checkLimits();
-    return int(tempC * (1 + decimal));
+    return int(tempC * pow(10, decimal));
 }
 
-bool Thermocouple::checkLimits() { 
+bool Thermocouple::checkLimits() {
     if (tempC > faultLimit_H) { 
         faultCode = TC_FAULT_HIGH_LIMIT;
         return false;
