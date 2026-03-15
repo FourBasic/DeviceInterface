@@ -1,20 +1,21 @@
 #ifndef SENSOR555_H
 #define SENSOR555_H
-#define SENSOR_FAULT_HIGH_LIMIT 1
-#define SENSOR_FAULT_LOW_LIMIT 2
 #include <Arduino.h>
+#include "TimerOnDelay.h"
 
 class Sensor555 {
   public:		
 	  Sensor555();
-    void setup(uint16_t _timeout, int _faultLimit_L, int _faultLimit_H);
-    float update();
-    bool checkLimits();
-    int getFaultCode();
+    void setup(uint16_t _timeoutMsec, float _unitPerMsec, float _offset, int safeVal);
+    float update(int pinState);
+    uint16_t getPulseLength();
   private:
     float val;
-    int faultLimit_L, faultLimit_H;
-    int faultCode;
-    uint16_t timeout;
-}
+    uint16_t pulseLength;
+    int safeVal;
+    bool timeout;
+    uint16_t timeoutMsec;    
+    TimerOnDelay timer;
+    float unitPerMsec, offset;
+};
 #endif

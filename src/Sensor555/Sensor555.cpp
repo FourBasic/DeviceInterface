@@ -1,32 +1,34 @@
-#include "Sensor555.h"
 #include <Arduino.h>
+#include "Sensor555.h"
+#include "TimerOnDelay.h"
+
+#define SENSOR555_NTC 0
+#define SENSOR555_PTC 1
 
 Sensor555::Sensor555() { }
-
-void Sensor555::setup(uint16_t _timeout, int _faultLimit_L, int _faultLimit_H) {    
-
+void Sensor555::setup(uint16_t _timeoutMsec, float _unitPerMsec, float _offset, int safeVal) {
+    timeoutMsec = _timeoutMsec;
+    unitPerMsec = _unitPerMsec;
+    offset = _offset;
+    val = safeVal;
 }
 
-float Sensor555::update() {
-    
-    
-    checkLimits();
-    return val;
-}
-
-bool Sensor555::checkLimits() {
-    if (tempC > faultLimit_H) { 
-        faultCode = TC_FAULT_HIGH_LIMIT;
-        return false;
-    } else if (tempC < faultLimit_L) {
-        faultCode = TC_FAULT_LOW_LIMIT;
-        return false;
-    } else if (faultCode == TC_FAULT_HIGH_LIMIT || faultCode == TC_FAULT_LOW_LIMIT) {
-        faultCode = 0;
+float Sensor555::update(int pinState) {
+    // Pin went high-->low. Do calculate new value based on elapsed time ET
+    if (timer.getTimerTiming() && !pinState) {
+        pulseLength = timer.getTimerElapsedTime();
+        //val = (pulseLength * unitPerMsec) + offset;
+        long x;
+        x = map(long(pulseLength), 1890, 1043, 23, 43);
+        val = float(x);
+    } else if (timer.getTimerDone()) {
+        val = safeVal;
     }
-    return true;
+    timer.update(pinState, timeoutMsec);
+    return val;
+    
 }
 
-int Sensor555::getFaultCode() { 
-    return faultCode;
+uint16_t Sensor555::getPulseLength() {
+    return pulseLength;
 }
